@@ -2,5 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <body>
         <h1>Restaurant List</h1>
+        <div th:each="restaurant : ${restaurants}" th:text="${restaurant.name}">go away</div>
     </body>
 </html>
