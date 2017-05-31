@@ -1,0 +1,5 @@
+---
+applications:
+  - name: restaurant-kotlin-consumer
+    buildpack: java_buildpack_offline
+    path: build/libs/restaurant-kotlin-consumer-0.0.1-SNAPSHOT.jar
