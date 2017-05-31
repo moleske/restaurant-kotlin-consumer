@@ -17,12 +17,11 @@ import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpMethod
 import org.springframework.test.context.junit4.SpringRunner
 
-
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner::class)
 class PactTest {
     @Autowired
-    private val testRestTemplate: TestRestTemplate? = null
+    val testRestTemplate: TestRestTemplate? = null
 
     @get:Rule
     val mockProvider = PactProviderRule("restaurant_api", this)
