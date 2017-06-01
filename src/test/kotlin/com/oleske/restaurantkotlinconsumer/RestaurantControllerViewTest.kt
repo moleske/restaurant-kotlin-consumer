@@ -17,20 +17,31 @@ import org.springframework.test.context.junit4.SpringRunner
 @WebMvcTest(RestaurantControllerView::class)
 class RestaurantControllerViewTest {
     @MockBean
-    val resturantGetter: RestaurantGetter? = null
+    val restaurantGetter: RestaurantGetter? = null
 
     @Autowired
     val webDriver: WebDriver? = null
 
-    var restaurantOneName: String = ""
-    var restaurantTwoName: String = ""
+    lateinit var restaurantOneExpected: Restaurant
+    lateinit var restaurantTwoExpected: Restaurant
 
     @Before
     fun setUp() {
-        restaurantOneName = Math.random().toString()
-        restaurantTwoName = Math.random().toString()
-        `when`(resturantGetter!!.getRestaurants()).thenReturn(
-                listOf(Restaurant(name = restaurantOneName), Restaurant(name = restaurantTwoName)))
+        restaurantOneExpected = Restaurant(
+                name = Math.random().toString(),
+                cuisineType = Math.random().toString(),
+                websiteUrl = Math.random().toString(),
+                rating = Math.random().toInt()
+        )
+        restaurantTwoExpected = Restaurant(
+                name = Math.random().toString(),
+                cuisineType = Math.random().toString(),
+                websiteUrl = Math.random().toString(),
+                rating = Math.random().toInt()
+        )
+
+        `when`(restaurantGetter!!.getRestaurants()).thenReturn(
+                listOf(restaurantOneExpected, restaurantTwoExpected))
 
         webDriver!!.get("/")
     }
@@ -44,10 +55,20 @@ class RestaurantControllerViewTest {
 
     @Test
     fun getHome_DisplaysRestaurants() {
-        val restaurants = webDriver!!.findElements(By.tagName("div"))
+        val restaurants = webDriver!!.findElements(By.tagName("tr"))
 
-        assertThat(restaurants.size).isEqualTo(2)
-        assertThat(restaurants[0].text).isEqualTo(restaurantOneName)
-        assertThat(restaurants[1].text).isEqualTo(restaurantTwoName)
+        assertThat(restaurants.size).isEqualTo(3)
+        val restaurantOne = restaurants[1].findElements(By.tagName("td"))
+        val restaurantTwo = restaurants[2].findElements(By.tagName("td"))
+
+        assertThat(restaurantOne[0].text).isEqualTo(restaurantOneExpected.name)
+        assertThat(restaurantOne[1].text).isEqualTo(restaurantOneExpected.cuisineType)
+        assertThat(restaurantOne[2].text).isEqualTo(restaurantOneExpected.websiteUrl)
+        assertThat(restaurantOne[3].text).isEqualTo(restaurantOneExpected.rating.toString())
+
+        assertThat(restaurantTwo[0].text).isEqualTo(restaurantTwoExpected.name)
+        assertThat(restaurantTwo[1].text).isEqualTo(restaurantTwoExpected.cuisineType)
+        assertThat(restaurantTwo[2].text).isEqualTo(restaurantTwoExpected.websiteUrl)
+        assertThat(restaurantTwo[3].text).isEqualTo(restaurantTwoExpected.rating.toString())
     }
 }

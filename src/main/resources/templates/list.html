@@ -1,7 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <body>
-        <h1>Restaurant List</h1>
-        <div th:each="restaurant : ${restaurants}" th:text="${restaurant.name}">go away</div>
-    </body>
+<body>
+<h1>Restaurant List</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Cuisine Type</th>
+        <th>Website</th>
+        <th>Rating</th>
+    </tr>
+    <tr th:each="restaurant : ${restaurants}">
+        <td th:text="${restaurant.name}" style="text-align:center">go away</td>
+        <td th:text="${restaurant.cuisineType}" style="text-align:center">go away</td>
+        <td th:text="${restaurant.websiteUrl}" style="text-align:center">go away</td>
+        <td th:text="${restaurant.rating}" style="text-align:center">go away</td>
+    </tr>
+</table>
+</body>
 </html>
