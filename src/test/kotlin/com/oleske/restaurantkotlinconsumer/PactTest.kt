@@ -68,18 +68,18 @@ class PactTest {
 
                 })
         assertThat(entity.statusCodeValue).isEqualTo(200)
-        assertThat(entity.body.size).isGreaterThan(0)
-        val restaurant = entity.body[0]
-        assertThat(restaurant.id).isGreaterThanOrEqualTo(0)
-        assertThat(restaurant.name).isNotNull()
-        assertThat(restaurant.ownerName).isNotNull()
-        assertThat(restaurant.headChefName).isNotNull()
-        assertThat(restaurant.cuisineType).isNotNull()
-        assertThat(restaurant.shortDescription).isNotNull()
-        assertThat(restaurant.fullDescription).isNotNull()
-        assertThat(restaurant.websiteUrl).isNotNull()
-        assertThat(restaurant.rating).isGreaterThanOrEqualTo(0)
-        assertThat(restaurant.michelinStarRating).isGreaterThanOrEqualTo(0)
-        assertThat(restaurant.zagatRating).isGreaterThanOrEqualTo(0)
+        assertThat(entity.body?.size).isGreaterThan(0)
+        val restaurant = entity.body?.get(0)
+        assertThat(restaurant?.id).isGreaterThanOrEqualTo(0)
+        assertThat(restaurant?.name).isNotNull
+        assertThat(restaurant?.ownerName).isNotNull
+        assertThat(restaurant?.headChefName).isNotNull
+        assertThat(restaurant?.cuisineType).isNotNull
+        assertThat(restaurant?.shortDescription).isNotNull
+        assertThat(restaurant?.fullDescription).isNotNull
+        assertThat(restaurant?.websiteUrl).isNotNull
+        assertThat(restaurant?.rating).isGreaterThanOrEqualTo(0)
+        assertThat(restaurant?.michelinStarRating).isGreaterThanOrEqualTo(0)
+        assertThat(restaurant?.zagatRating).isGreaterThanOrEqualTo(0)
     }
 }
